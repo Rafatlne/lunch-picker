@@ -3,7 +3,7 @@ set -e
 export PGPASSWORD="$POSTGRES_PASSWORD"
 
 # Check if the user already exists
-user_exists=$(psql -U "postgres" -tAc "SELECT 1 FROM pg_user WHERE usename = '$POSTGRES_USER'")
+user_exists=$(psql -U "$POSTGRES_USER" -tAc "SELECT 1 FROM pg_user WHERE usename = '$POSTGRES_USER'")
 if [ -z "$user_exists" ]; then
   psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     CREATE USER "$POSTGRES_USER" WITH PASSWORD '$POSTGRES_PASSWORD';

@@ -10,6 +10,8 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "5432:5432"
+    networks:
+      - mynetwork
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
 
@@ -28,5 +30,9 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+    networks:
+      - mynetwork
 volumes:
   postgres_data:
+networks:
+  mynetwork:
